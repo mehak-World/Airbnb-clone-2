@@ -1,0 +1,30 @@
+
+<div style = "width: 70%">
+    <form method = "post" action = "/listings/<%= listingId %>/reviews">
+        <h4>Create Review</h4>
+        <!-- <div class="mb-3">
+            <label for="rating" class="form-label">Add your rating</label>
+            <input type="range" class="form-control" id="rating" min= 1 max = 5 name = "rating" default = 3 required>
+          </div> -->
+          <select id="star-rating" name="rating">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+          <div class="mb-3">
+            <label for="comment" class="form-label">Comments: </label>
+            <textarea class="form-control" id="comment" rows="3" name = "comment"></textarea>
+          </div>
+          <button class = "listing-btn">Add Review</button>
+    </form>
+</div>
+
+<script>
+  $(document).ready(function() {
+      $('#star-rating').barrating({
+          theme: 'fontawesome-stars',
+      });
+  });
+</script>

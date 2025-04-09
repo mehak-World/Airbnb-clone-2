@@ -1,0 +1,30 @@
+<%- include("../boilerplate.ejs") %>
+<% if (success && success.length > 0) { %>
+  <div class="alert alert-success" style = "width: 50%; margin: auto; margin-top: 10px;">
+      <%= success %>
+  </div>
+<% } %>
+
+<% if (error && error.length > 0) { %>
+<div class="alert alert-danger"style = "width: 50%; margin: auto; margin-top: 10px;">
+    <%= error %>
+</div>
+<% } %>
+
+<div class="w-50" style = "margin:auto">
+    <form method = "post" action= "/user/login">
+        <h2> Login</h2>
+        <br />
+        <br />
+        <div class="mb-3">
+            <label for="username" class="form-label">Username: </label>
+            <input type="text" class="form-control" name = "username" id="username" >
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password: </label>
+            <input type="password" class="form-control" name = "password" id="password" >
+          </div>
+
+          <button class = "listing-btn">Login</button>
+    </form>
+</div>

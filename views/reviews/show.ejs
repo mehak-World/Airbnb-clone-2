@@ -1,0 +1,33 @@
+<div>
+   <h4>All Reviews</h4>
+    <div style = "display: flex; gap: 10px; flex-wrap: wrap; max-width: 80%">
+        <% for(let review of listing.reviews) { %>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <% if(review.author.username) { %>
+                    <h5 class = "card-title"><%= review.author.username %></h5>
+                 <%  } else { %>
+                  <h5 class = "card-title">ananymous</h5>
+                  <% } %>
+                  <% for(let i = 0; i < review.rating; i++) { %>
+                    <span class="fa fa-star checked"></span>
+                    <% } %>
+                    <% for(let i = 0; i < 5 - review.rating; i++) { %>
+                        <span class="fa fa-star"></span>
+                        <% } %>
+    
+                  <p class="card-text"><%= review.comment %></p>
+                  <form method = "post" action = "/listings/<%= listing._id %>/reviews/<%= review._id %>/delete">
+                    <button class = "btn btn-danger" style = "background-color: black; border: none;">Delete</button>
+                  </form>
+                
+                </div>
+               
+              </div>
+             
+                
+        <% } %>
+    </div>
+
+    
+</div>

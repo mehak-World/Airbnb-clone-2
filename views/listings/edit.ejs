@@ -1,0 +1,85 @@
+
+
+<%- include("../boilerplate.ejs") %>
+<div class="new-listing d-flex justify-content-center align-items-center " style = "margin: 20px 0">
+    <div class="w-70">
+        <h2 class="text-center mb-4">Edit Listing</h2>
+        <form method="POST" class="needs-validation" enctype="multipart/form-data" novalidate action = "/listings/edit/<%= listing.id %>">
+            <!-- Listing Name -->
+            <div class="form-group">
+                <label for="name">Listing Name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Enter Listing Name" value = "<%= listing.name %>" required>
+                <div class="valid-feedback">Looks good!</div>
+                <div class="invalid-feedback">Enter a valid Listing Name.</div>
+            </div>
+
+            <!-- Price -->
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input type="text" class="form-control" id="price" name="price" placeholder="Enter Price" value = "<%= listing.price %>" required>
+                <div class="valid-feedback">Looks good!</div>
+                <div class="invalid-feedback">Enter a valid price.</div>
+            </div>
+
+            <!-- Image URL -->
+            <!-- <div class="form-group">
+                <label for="image">Image URL</label>
+                <input type="text" class="form-control" id="image" value = "<%= listing.image %>" name="image" placeholder="Enter Image URL">
+                <div class="invalid-feedback">Enter a valid image URL.</div>
+            </div> -->
+
+            <div>
+                <h5>Current Image</h5>
+                <img src = <%= listing.image.url %> height = "200px" width = "240px">
+            </div>
+            <br />
+            
+
+            <div class="form-group">
+                <label for="image">Upload New Listing image</label>
+                <input  type = "file"  id="image" name = "image">
+                
+            </div>
+
+            <!-- City and Country -->
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label for="city">City</label>
+                    <input type="text" class="form-control" id="city" name="city" placeholder="Enter City" value = "<%= listing.city %>" required>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please provide a valid city.</div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="country">Country</label>
+                    <input type="text" class="form-control" id="country" name="country" value = "<%= listing.country %>" placeholder="Enter Country" required>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please provide a valid country.</div>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-block w-50" style = "text-align: center; margin:auto; background: rgb(245, 58, 89);color: white; padding: 10px; border-radius: 10px;">Edit Listing</button>
+        </form>
+    </div>
+</div>
+
+<script>
+      (() => {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
+</script>

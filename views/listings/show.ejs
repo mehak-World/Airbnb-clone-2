@@ -1,0 +1,90 @@
+<%- include("../boilerplate.ejs") %>
+<% if (success && success.length > 0) { %>
+    <div class="alert alert-success" style = "width: 50%; margin: auto; margin-top: 10px;">
+        <%= success %>
+    </div>
+<% } %>
+
+<% if (error && error.length > 0) { %>
+  <div class="alert alert-danger" style = "width: 50%; margin: auto; margin-top: 10px;" >
+      <%= error %>
+  </div>
+<% } %>
+<div style = "position: absolute; top: 20%; left: 20%;">
+    <h2> Listing Details</h2>
+    <div style = "align-items: center;">
+        <div style="width: 70%; position: relative;">
+            <img src="<%= listing.image.url %>" 
+                 alt="Listing Image" 
+                 style="width: 100%; height: auto; border-radius: 10px; aspect-ratio: 16/9; object-fit: cover;">
+        </div>
+        
+        <div style="padding: 20px;  width: 100%; ">
+            <% if(listing.owner) { %>
+                <p style=" font-style: italic; margin: 0 0 10px;">Owned by <%= listing.owner.username %></p>
+            <% } %>
+            
+            <p style="font-size: 1.2rem; font-weight: bold; margin: 0 0 10px;"> <%= listing.name %> </p>
+            <p style="font-size: 1rem; color: #4caf50; font-weight: bold; margin: 0 0 10px;"> $<%= listing.price %> </p>
+            <p style="font-size: 0.9rem; color: #666; margin: 0 0 20px;"> <%= listing.city %>, <%= listing.country %> </p>
+            <div style="display: flex; gap: 10px;">
+                <% if(!listing.owner || (listing.owner && user && user._id.equals(listing.owner._id))) { %>
+                    <a href="/listings/edit/<%= listing.id %>" style="text-decoration: none;">
+                        <button type="button" class="btn btn-warning" style="background-color: #f53858; color: white; outline: none; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; transition: background-color 0.3s;">
+                            Edit
+                        </button>
+                    </a>
+                    <form method="POST" action="/listings/<%= listing.id %>/delete" style="margin: 0;">
+                        <button type="submit" class="btn btn-danger" style="background-color: #171515; color: white; outline: none; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; transition: background-color 0.3s;">
+                            Delete
+                        </button>
+                    </form>
+                <% } %>
+               
+            </div>
+        </div>
+        
+        
+    </div>
+   <br />
+   <br />
+    <%- include("../reviews/create.ejs", { listingId: listing._id }) %>
+    <br />
+    <br />
+    <% if(listing.reviews && listing.reviews.length  > 0){ %>
+ <%- include("../reviews/show.ejs", { listing: listing }) %>
+    <% } %>
+    <br />
+    <br/>
+   
+    <h5>Where you will be</h5>
+    <div id="map" style="height: 500px; width: 100%;"></div>
+    
+
+   
+    <script>
+        // Using EJS to inject lat and lon dynamically into the JavaScript code
+        const lat = <%= lat %>;
+        const lon = <%= lon %>;
+
+        // Create and configure the map
+        const map = L.map('map').setView([lat, lon], 13);  // Zoom level can be adjusted
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19
+        }).addTo(map);
+
+        // Place a marker on the map
+        L.marker([lat, lon]).addTo(map).bindPopup('Here is the location!').openPopup();
+    </script>
+    <!-- <div id="map" style="height: 500px; width: 100%;" data-lat="<%= lat %>" data-lon="<%= lon %>"></div> -->
+
+    
+    
+
+    <br />
+    <br />
+</div>
+
+
+   
+

@@ -1,0 +1,18 @@
+<%- include("../boilerplate.ejs") %>
+<div class="w-50" style = "margin:auto">
+    <form method = "post" action= "/user/signup">
+        <h2> SignUp</h2>
+        <br />
+        <br />
+        <div class="mb-3">
+            <label for="username" class="form-label">Username: </label>
+            <input type="text" class="form-control" name = "username" id="username" >
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password: </label>
+            <input type="password" class="form-control" name = "password" id="password" >
+          </div>
+
+          <button class = "listing-btn">SignUp</button>
+    </form>
+</div>

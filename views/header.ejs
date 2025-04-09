@@ -1,0 +1,39 @@
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto header">
+        <li>
+            <i class="fa-solid fa-compass" style = "color: rgb(245, 80, 108);"></i>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/">All Listings</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/listings/new">New Listing</a>
+        </li>
+      
+      </ul>
+
+      <ul style = "display: flex; gap: 10px;">
+        <% if(!user) { %>
+          <form method = "get" action = "/user/signup">
+            <button class = "listing-btn">SignUp</button>
+          </form>
+          <form method = "get" action = "/user/login">
+            <button class = "listing-btn">Login</button>
+          </form>
+        <% } else { %>
+          <form method = "get" action = "/user/logout">
+            <button class = "listing-btn" style = "background: black">Logout</button>
+          </form>
+        <% } %>
+       
+        
+      </ul>
+    </div>
+  </nav>
