@@ -1,0 +1,40 @@
+name: Node.js CI
+
+# Trigger the workflow on push or pull request
+on:
+  push:
+    branches:
+      - main   # Trigger on push to the main branch (you can also use 'master')
+  pull_request:
+    branches:
+      - main   # Trigger on pull request to the main branch (you can also use 'master')
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # The virtual environment for running the jobs
+
+    steps:
+    # Checkout the code
+    - name: Checkout code
+      uses: actions/checkout@v2  # This checks out the code from the repository
+
+    # Set up Node.js
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20'  # Specify the Node.js version (e.g., '14', '16', etc.)
+
+    # Install dependencies
+    - name: Install dependencies
+      run: npm install  # Run npm install to install dependencies
+
+      
+    # (Optional) Push Docker image to DockerHub (if you want to containerize and push)
+    - name: Build and push Docker image
+      run: |
+       docker build -t mehaknarang0609/airbnb-app .
+       docker push mehaknarang0609/airbnb-app
+    #   env:
+    #     DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+    #     DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
